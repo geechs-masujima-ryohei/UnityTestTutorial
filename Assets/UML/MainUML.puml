@@ -1,0 +1,53 @@
+@startuml
+
+namespace Input {
+	interface IInputProvider
+	class UnityInputProvider
+	class AIInputProvider
+}
+
+class DateTime <<struct>> {
+	int Year
+	int Month
+	int Day
+}
+
+namespace People {
+	enum ESex {
+		Male
+		Femele
+		Unknown
+	}
+	class PersonInfo{
+		string Name
+		DateTime Birthday
+		ESex Sex
+		int Age 
+	}
+}
+
+namespace Playable {
+	class Player
+	class AIPlayer
+	class GroundChecker
+}
+namespace Scene {
+	class TestPlayModeScene
+}
+
+DateTime o-- People.PersonInfo
+People.ESex o- People.PersonInfo
+
+Input.IInputProvider <|.. Input.UnityInputProvider
+Input.IInputProvider <|.. Input.AIInputProvider
+
+Playable.GroundChecker "1"-up-"1" Playable.Player :< owns
+People.PersonInfo o-up- Playable.Player
+
+Playable.Player <|--  Playable.AIPlayer
+
+Input.IInputProvider o-up- Playable.Player
+
+Playable.Player "0.."-up- "1" Scene.TestPlayModeScene :< owns
+
+@enduml
