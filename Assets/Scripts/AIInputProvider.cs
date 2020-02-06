@@ -14,6 +14,10 @@ public class AIInputProvider : IInputProvider
         this.targetPlayer = targetPlayer;
     }
 
+    /// <summary>
+    /// ダッシュしない
+    /// </summary>
+    /// <returns></returns>
     public bool GetDash()
     {
         return false;
